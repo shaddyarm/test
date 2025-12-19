@@ -1,0 +1,142 @@
+{
+	"openapi": "3.0.2",
+	"info": {
+		"title": "Тест API проверка переменных без enum",
+		"description": "Тестовые данные для проверки маппинга",
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "https://test.com/{path}/{version}",
+			"description": "Сервер в зависимости от окружения",
+			"variables": {
+				"version": {
+					"default": "v1",
+					"description": "Примеры значений: v1, v2, v3, v4"
+				},
+				"path": {
+					"default": "api",
+					"description": "Примеры значений: api, base, path"
+				}
+			}
+		}
+	],
+	"paths": {
+		"/users": {
+			"get": {
+				"summary": "Получение всех пользователей",
+				"description": "Получение всех пользователей в системе",
+				"operationId": "getUsers",
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/User"
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Пользователи"]
+			}
+		},
+		"/users/{id}": {
+			"get": {
+				"summary": "Получение пользователя",
+				"description": "Получеение определенного пользователя",
+				"operationId": "getUserById",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/User"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Пользователь"]
+			}
+		},
+		"/orders": {
+			"post": {
+				"summary": "Заказ",
+				"description": "Новый заказ",
+				"operationId": "createOrder",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Order"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"201": {
+						"description": "Created successfully",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Order"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Заказ"]
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"User": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"username": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string",
+						"format": "email"
+					}
+				}
+			},
+			"Order": {
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer"
+					},
+					"product_id": {
+						"type": "integer"
+					},
+					"quantity": {
+						"type": "integer"
+					}
+				}
+			}
+		}
+	}
+}
