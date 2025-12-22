@@ -75,6 +75,36 @@
 				"tags": ["Пользователь"]
 			}
 		},
+		"/sucks/{id}": {
+			"get": {
+				"summary": "Получение пользователя",
+				"description": "Получеение определенного пользователя",
+				"operationId": "suck",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"schema": {
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/User"
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Пользователь"]
+			}
+		},
 		"/orders": {
 			"post": {
 				"summary": "Заказ",
