@@ -45,6 +45,29 @@
 				"tags": ["Пользователи"]
 			}
 		},
+		"/Lol": {
+			"get": {
+				"summary": "Получение всех пользователей",
+				"description": "Получение всех пользователей в системе",
+				"operationId": "getLols",
+				"responses": {
+					"200": {
+						"description": "Successful operation",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/User"
+									}
+								}
+							}
+						}
+					}
+				},
+				"tags": ["Пользователи"]
+			}
+		},
 		"/users/{id}": {
 			"get": {
 				"summary": "Получение пользователя",
